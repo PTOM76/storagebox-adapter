@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "storagebox-adapter:block/exporter",
+    "down": "storagebox-adapter:block/exporter",
+    "up": "storagebox-adapter:block/exporter",
+    "north": "storagebox-adapter:block/exporter",
+    "east": "storagebox-adapter:block/exporter",
+    "south": "storagebox-adapter:block/exporter",
+    "west": "storagebox-adapter:block/exporter"
+  }
+}

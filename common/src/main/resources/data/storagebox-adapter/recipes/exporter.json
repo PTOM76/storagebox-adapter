@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "O"
+  ],
+  "key": {
+    "#": {
+      "item": "storagebox:storagebox"
+    },
+    "O": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "result": {
+    "item": "storagebox-adapter:exporter",
+    "count": 1
+  }
+}
