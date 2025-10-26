@@ -2,7 +2,6 @@ package net.pitan76.storageboxadapter.block;
 
 import net.minecraft.block.Block;
 import net.pitan76.mcpitanlib.api.block.CompatibleMaterial;
-import net.pitan76.mcpitanlib.api.block.v2.CompatBlock;
 import net.pitan76.mcpitanlib.api.block.v2.CompatibleBlockSettings;
 import net.pitan76.mcpitanlib.api.registry.result.RegistryResult;
 
@@ -15,7 +14,7 @@ public class Blocks {
     public static RegistryResult<Block> EXPORTER;
 
     public static void init() {
-        IMPORTER = registry.registerBlock(_id("importer"), () -> new CompatBlock(CompatibleBlockSettings.of(_id("importer"), CompatibleMaterial.STONE)));
-        EXPORTER = registry.registerBlock(_id("exporter"), () -> new CompatBlock(CompatibleBlockSettings.of(_id("exporter"), CompatibleMaterial.STONE)));
+        IMPORTER = registry.registerBlock(_id("importer"), () -> new ImporterBlock(CompatibleBlockSettings.of(_id("importer"), CompatibleMaterial.STONE)));
+        EXPORTER = registry.registerBlock(_id("exporter"), () -> new ExporterBlock(CompatibleBlockSettings.of(_id("exporter"), CompatibleMaterial.STONE)));
     }
 }

@@ -1,5 +1,6 @@
 package net.pitan76.storageboxadapter;
 
+import net.pitan76.storageboxadapter.block.BlockEntities;
 import net.pitan76.storageboxadapter.block.Blocks;
 import net.pitan76.storageboxadapter.item.Items;
 import net.pitan76.mcpitanlib.api.CommonModInitializer;
@@ -18,6 +19,7 @@ public class StorageBoxAdapter extends CommonModInitializer {
         INSTANCE = this;
         registry = super.registry;
 
+        BlockEntities.init();
         Blocks.init();
         Items.init();
     }
