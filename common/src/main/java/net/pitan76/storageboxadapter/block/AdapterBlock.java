@@ -11,9 +11,9 @@ import net.pitan76.mcpitanlib.api.util.CompatActionResult;
 import net.pitan76.mcpitanlib.api.util.TextUtil;
 import org.jetbrains.annotations.Nullable;
 
-public class ExporterBlock extends CompatBlock implements ExtendBlockEntityProvider {
+public class AdapterBlock extends CompatBlock implements ExtendBlockEntityProvider {
 
-    public ExporterBlock(CompatibleBlockSettings settings) {
+    public AdapterBlock(CompatibleBlockSettings settings) {
         super(settings);
     }
 
@@ -25,11 +25,19 @@ public class ExporterBlock extends CompatBlock implements ExtendBlockEntityProvi
         Player player = e.getPlayer();
         player.sendMessage(TextUtil.literal("The block was right-clicked!"));
 
+        BlockEntity blockEntity = e.getBlockEntity();
+        if (!(blockEntity instanceof AdapterBlockEntity)) {
+            return e.success();
+        }
+
+        AdapterBlockEntity adapterBlockEntity = (AdapterBlockEntity) blockEntity;
+        player.openExtendedMenu(adapterBlockEntity);
+
         return e.success();
     }
 
     @Override
     public @Nullable BlockEntity createBlockEntity(TileCreateEvent e) {
-        return new ExporterBlockEntity(e);
+        return new AdapterBlockEntity(e);
     }
 }

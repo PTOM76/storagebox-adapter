@@ -6,6 +6,7 @@ import net.pitan76.storageboxadapter.item.Items;
 import net.pitan76.mcpitanlib.api.CommonModInitializer;
 import net.pitan76.mcpitanlib.api.registry.v2.CompatRegistryV2;
 import net.pitan76.mcpitanlib.api.util.CompatIdentifier;
+import net.pitan76.storageboxadapter.screen.ScreenHandlers;
 
 public class StorageBoxAdapter extends CommonModInitializer {
     public static final String MOD_ID = "storagebox-adapter";
@@ -19,9 +20,10 @@ public class StorageBoxAdapter extends CommonModInitializer {
         INSTANCE = this;
         registry = super.registry;
 
-        BlockEntities.init();
+        ScreenHandlers.init();
         Blocks.init();
         Items.init();
+        BlockEntities.init();
     }
 
     // ----

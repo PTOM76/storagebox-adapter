@@ -15,10 +15,12 @@ public class Items {
     public static final ItemSettingsBuilder STANDARD_ITEM_SETTINGS = ItemSettingsBuilder.of()
             .addGroup(ItemGroups.MISC);
 
+    public static RegistryResult<Item> ADAPTER;
     public static RegistryResult<Item> IMPORTER;
     public static RegistryResult<Item> EXPORTER;
 
     public static void init() {
+        ADAPTER = registry.registerItem(_id("adapter"), () -> ItemUtil.create(Blocks.ADAPTER.getOrNull(), STANDARD_ITEM_SETTINGS.build(_id("adapter"))));
         IMPORTER = registry.registerItem(_id("importer"), () -> ItemUtil.create(Blocks.IMPORTER.getOrNull(), STANDARD_ITEM_SETTINGS.build(_id("importer"))));
         EXPORTER = registry.registerItem(_id("exporter"), () -> ItemUtil.create(Blocks.EXPORTER.getOrNull(), STANDARD_ITEM_SETTINGS.build(_id("exporter"))));
     }

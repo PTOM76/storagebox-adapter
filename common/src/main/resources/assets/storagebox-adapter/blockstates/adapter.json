@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "storagebox-adapter:block/adapter"
+    }
+  }
+}

@@ -22,8 +22,6 @@ public class ImporterBlock extends CompatBlock implements ExtendBlockEntityProvi
         if (e.isSneaking()) return super.onRightClick(e);
         if (e.isClient()) return e.success();
 
-
-
         Player player = e.getPlayer();
         player.sendMessage(TextUtil.literal("The block was right-clicked!"));
 
