@@ -33,4 +33,11 @@ public class StorageBoxUtil {
         if (nbt == null) return 0;
         return NbtUtil.getInt(nbt, "StorageSize");
     }
+
+    public static void setCount(ItemStack storageBoxStack, int count) {
+        if (!isStorageBox(storageBoxStack)) return;
+
+        NbtCompound nbt = storageBoxStack.getOrCreateNbt();
+        NbtUtil.putInt(nbt, "StorageSize", count);
+    }
 }

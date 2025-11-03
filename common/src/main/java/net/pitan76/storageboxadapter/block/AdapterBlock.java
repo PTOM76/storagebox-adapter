@@ -8,7 +8,6 @@ import net.pitan76.mcpitanlib.api.entity.Player;
 import net.pitan76.mcpitanlib.api.event.block.BlockUseEvent;
 import net.pitan76.mcpitanlib.api.event.block.TileCreateEvent;
 import net.pitan76.mcpitanlib.api.util.CompatActionResult;
-import net.pitan76.mcpitanlib.api.util.TextUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class AdapterBlock extends CompatBlock implements ExtendBlockEntityProvider {
@@ -23,12 +22,8 @@ public class AdapterBlock extends CompatBlock implements ExtendBlockEntityProvid
         if (e.isClient()) return e.success();
 
         Player player = e.getPlayer();
-        player.sendMessage(TextUtil.literal("The block was right-clicked!"));
-
         BlockEntity blockEntity = e.getBlockEntity();
-        if (!(blockEntity instanceof AdapterBlockEntity)) {
-            return e.success();
-        }
+        if (!(blockEntity instanceof AdapterBlockEntity)) return e.success();
 
         AdapterBlockEntity adapterBlockEntity = (AdapterBlockEntity) blockEntity;
         player.openExtendedMenu(adapterBlockEntity);
