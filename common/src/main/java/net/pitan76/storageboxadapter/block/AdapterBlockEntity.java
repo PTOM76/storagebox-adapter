@@ -29,8 +29,10 @@ import net.pitan76.storageboxadapter.util.StorageBoxUtil;
 
 public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlockEntityTicker<AdapterBlockEntity>, VanillaStyleSidedInventory, IInventory, ExtendedScreenHandlerFactory {
 
-    public ItemStackList inv = ItemStackList.ofSize(1);
-    public ItemStackList adapterInv = ItemStackList.ofSize(1);
+    public ItemStackList inv = ItemStackList.ofSize(1, ItemStackUtil.empty());
+    public ItemStackList tmpInv = ItemStackList.ofSize(1, ItemStackUtil.empty());
+
+    public ItemStack prevStack = ItemStackUtil.empty();
 
     public AdapterBlockEntity(BlockEntityType<?> type, TileCreateEvent e) {
         super(type, e);
@@ -55,47 +57,12 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
 
     @Override
     public ItemStackList getItems() {
-        return adapterInv;
+        return tmpInv;
     }
 
     @Override
     public int[] getAvailableSlots(AvailableSlotsArgs args) {
-        return new int[0];
-    }
-
-    @Override
-    public ScreenHandler createMenu(CreateMenuEvent e) {
-        IInventory inv = () -> this.inv;
-        return new AdapterScreenHandler(e.syncId, e.playerInventory, this, inv);
-    }
-
-    @Override
-    public void tick(TileTickEvent<AdapterBlockEntity> e) {
-        if (e.isClient()) return;
-        if (inv.isEmpty()) return;
-
-        ItemStack storageBoxStack = inv.get(0);
-        if (!StorageBoxUtil.isStorageBox(storageBoxStack)) return;
-
-        // StorageBoxの中身を取得してadapterInvにセット (tickまいなのでそろそろ最適化すべき)
-        ItemStack stack = StorageBoxUtil.getStack(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
-        int count = StorageBoxUtil.getCount(storageBoxStack);
-        if (ItemStackUtil.isEmpty(stack) || count <= 0) {
-            adapterInv.set(0, ItemStackUtil.empty());
-            return;
-        }
-
-        int min = Math.min(count, 64);
-        ItemStackUtil.setCount(stack, min); // Configで最大64を変更可能にするべき
-        adapterInv.set(0, stack);
-
-
-
-        // adapterInvのstackが変わったらStorageBoxの中身を更新 (矛盾が生じている、だってすでにadapterInvに上でセットしているから)
-        ItemStack adapterStack = adapterInv.get(0);
-        if (adapterStack.getCount() != min) {
-            StorageBoxUtil.setCount(storageBoxStack, adapterStack.getCount());
-        }
+        return new int[]{0};
     }
 
     @Override
@@ -108,5 +75,51 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
     public void readNbt(ReadNbtArgs args) {
         super.readNbt(args);
         InventoryUtil.readNbt(args, inv);
+    }
+
+    @Override
+    public ScreenHandler createMenu(CreateMenuEvent e) {
+        IInventory inv = () -> this.inv;
+        return new AdapterScreenHandler(e.syncId, e.playerInventory, this, inv);
+    }
+
+    @Override
+    public void tick(TileTickEvent<AdapterBlockEntity> e) {
+        if (e.isClient()) return;
+        if (inv.isEmpty()) {
+            tmpInv.set(0, ItemStackUtil.empty());
+            return;
+        }
+
+        ItemStack storageBoxStack = inv.get(0);
+        if (!StorageBoxUtil.isStorageBox(storageBoxStack)) return;
+
+        int count = StorageBoxUtil.getCount(storageBoxStack);
+        int min = Math.min(count, 32);
+
+        if (storageBoxStack != prevStack) {
+            // StorageBoxの中身を取得してadapterInvにセット
+            ItemStack stack = StorageBoxUtil.getStack(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
+
+            if (ItemStackUtil.isEmpty(stack) || count <= 0) {
+                tmpInv.set(0, ItemStackUtil.empty());
+                return;
+            }
+            prevStack = storageBoxStack;
+
+            ItemStackUtil.setCount(stack, min); // Configで最大64を変更可能にするべき
+            tmpInv.set(0, stack);
+        }
+
+        ItemStack adapterStack = tmpInv.get(0);
+        if (ItemStackUtil.isEmpty(adapterStack)) return;
+
+        // adapterInvのstackが変わったらStorageBoxの中身を更新
+        if (adapterStack.getCount() != min) {
+            count = count + (adapterStack.getCount() - min);
+            StorageBoxUtil.setCount(storageBoxStack, count);
+            ItemStackUtil.setCount(adapterStack, Math.min(count, 32));
+            tmpInv.set(0, adapterStack);
+        }
     }
 }

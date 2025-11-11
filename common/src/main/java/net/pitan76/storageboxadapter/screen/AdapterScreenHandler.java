@@ -12,6 +12,7 @@ import net.pitan76.mcpitanlib.api.network.PacketByteUtil;
 import net.pitan76.mcpitanlib.api.util.*;
 import net.pitan76.mcpitanlib.api.util.math.PosUtil;
 import net.pitan76.storageboxadapter.block.AdapterBlockEntity;
+import net.pitan76.storageboxadapter.screen.slot.StorageBoxSlot;
 import org.jetbrains.annotations.Nullable;
 
 public class AdapterScreenHandler extends ExtendedScreenHandler {
@@ -40,7 +41,12 @@ public class AdapterScreenHandler extends ExtendedScreenHandler {
         this.tile = tile;
         addPlayerMainInventorySlots(playerInventory, 8, 84);
         addPlayerHotbarSlots(playerInventory, 8, 142);
-        addNormalSlot(inv, 0, 80, 35); // StorageBox Slot
+        addStorageBoxSlot(inv, 0, 80, 35); // StorageBox Slot
+    }
+
+    public void addStorageBoxSlot(Inventory inventory, int index, int x, int y) {
+        StorageBoxSlot slot = new StorageBoxSlot(this, inventory, index, x, y);
+        this.callAddSlot(slot);
     }
 
     @Override
