@@ -44,7 +44,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
 
     @Override
     public Text getDisplayName(DisplayNameArgs args) {
-        return TextUtil.translatable("container.storagebox-adapter.adapter");
+        return TextUtil.translatable("container.storageboxadapter.adapter");
     }
 
     @Override

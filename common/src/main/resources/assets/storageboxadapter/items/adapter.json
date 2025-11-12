@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "storagebox-adapter:item/adapter"
+    "model": "storageboxadapter:item/adapter"
   }
 }

@@ -9,7 +9,7 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/storagebox-adapter/icon.png",
+  "icon": "assets/storageboxadapter/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
