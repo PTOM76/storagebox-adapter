@@ -34,6 +34,8 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     modApi "net.pitan76:mcpitanlib-forge-${rootProject.mcpitanlib_version}"
+
+    modImplementation "curse.maven:storagebox-mod-419839:4684296"
 }
 
 processResources {

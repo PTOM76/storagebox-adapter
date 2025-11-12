@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "storagebox-adapter:adapter"
+          "name": "storageboxadapter:importer"
         }
       ],
       "conditions": [

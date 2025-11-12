@@ -1,0 +1,8 @@
+{
+    "block.storageboxadapter.adapter": "StorageBox Adapter",
+    "block.storageboxadapter.importer": "StorageBox Importer",
+    "block.storageboxadapter.exporter": "StorageBox Exporter",
+    "container.storageboxadapter.adapter": "StorageBox Adapter",
+    "container.storageboxadapter.importer": "StorageBox Importer",
+    "container.storageboxadapter.exporter": "StorageBox Exporter"
+}

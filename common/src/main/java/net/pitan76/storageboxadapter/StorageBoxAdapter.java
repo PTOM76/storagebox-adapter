@@ -9,7 +9,7 @@ import net.pitan76.mcpitanlib.api.util.CompatIdentifier;
 import net.pitan76.storageboxadapter.screen.ScreenHandlers;
 
 public class StorageBoxAdapter extends CommonModInitializer {
-    public static final String MOD_ID = "storagebox-adapter";
+    public static final String MOD_ID = "storageboxadapter";
     public static final String MOD_NAME = "StorageBox Adapter";
 
     public static StorageBoxAdapter INSTANCE;
