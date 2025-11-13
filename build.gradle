@@ -38,7 +38,6 @@ subprojects {
         modApi "net.pitan76:mcpitanlib-common-${rootProject.mcpitanlib_version}"
     }
 
-    /*
     if (name in rootProject.enabled_platforms.split(",")) {
         var modLoader = name
 
@@ -67,11 +66,15 @@ subprojects {
                         addGameVersion '1.19.2'
                         addGameVersion '1.20'
                         addGameVersion '1.20.1'
+                        addGameVersion '1.20.4'
                     }
-                    addGameVersion '1.20.4'
-                    if (modLoader != "forge") {
+
+                    if (modLoader == "fabric") {
                         addGameVersion '1.21'
                         addGameVersion '1.21.1'
+                    }
+
+                    if (modLoader != "forge") {
                         addGameVersion '1.21.2'
                         addGameVersion '1.21.3'
                         addGameVersion '1.21.4'
@@ -84,8 +87,12 @@ subprojects {
                     }
 
                     relations {
-                        if (modLoader == "fabric")
+                        if (modLoader == "fabric") {
                             requiredDependency "fabric-api"
+                            requiredDependency "storagebox-fabric"
+                        } else {
+                            requiredDependency "storagebox-mod"
+                        }
 
                         requiredDependency 'mcpitanlibarch'
                     }
@@ -106,26 +113,33 @@ subprojects {
                 versionNumber = project.mod_version + "-" + modLoader
 
                 gameVersions = []
-                if (modLoader != "neoforge")
-                    gameVersions.addAll(['1.18', '1.18.1', '1.18.2', '1.19', '1.19.1', '1.19.2', '1.20', '1.20.1'])
-                gameVersions.add('1.20.4')
-                if (modLoader != "forge")
-                    gameVersions.addAll(['1.21', '1.21.1', '1.21.2', '1.21.3', '1.21.4', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.9', '1.21.10'])
+                if (modLoader != "neoforge") {
+                    gameVersions.addAll(['1.18', '1.18.1', '1.18.2', '1.19', '1.19.1', '1.19.2', '1.20', '1.20.1', '1.20.4'])
+                }
+                if (modLoader == "fabric") {
+                    gameVersions.addAll(['1.21', '1.21.1'])
+                }
+                if (modLoader != "forge") {
+                    gameVersions.addAll(['1.21.2', '1.21.3', '1.21.4', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.9', '1.21.10'])
+                }
 
                 versionType = 'release'
                 uploadFile = tasks.remapJar
                 changelog = rootProject.changelog + "\nMCPitanLib version: " + mcpitanlib_version.split(":")[1]
                 loaders = [modLoader]
                 dependencies {
-                    if (modLoader == "fabric")
+                    if (modLoader == "fabric") {
                         required.project "P7dR8mSH" // Fabric API
+                        required.project "storagebox-fabric" // StorageBox for Fabric
+                    } else {
+                        required.project "storagebox-mod" // StorageBox
+                    }
 
                     required.project "uNRoUnGT" // MCPitanLib
                 }
             }
         }
     }
-    */
 }
 
 allprojects {
