@@ -109,7 +109,7 @@ subprojects {
         if (System.getenv("MODRINTH_TOKEN") != null) {
             modrinth {
                 token = System.getenv("MODRINTH_TOKEN")
-                projectId = ''
+                projectId = 'storagebox-adapter'
                 versionNumber = project.mod_version + "-" + modLoader
 
                 gameVersions = []
