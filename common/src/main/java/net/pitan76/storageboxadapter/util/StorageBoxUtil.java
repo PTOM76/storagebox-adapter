@@ -1,14 +1,10 @@
 package net.pitan76.storageboxadapter.util;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.pitan76.mcpitanlib.api.registry.CompatRegistryLookup;
 import net.pitan76.mcpitanlib.api.util.ItemStackUtil;
-import net.pitan76.mcpitanlib.api.util.NbtUtil;
 import net.pitan76.mcpitanlib.api.util.item.ItemUtil;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 public class StorageBoxUtil {
     public static boolean isStorageBox(ItemStack stack) {
@@ -16,28 +12,14 @@ public class StorageBoxUtil {
     }
 
     public static ItemStack getStack(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
-        if (!isStorageBox(storageBoxStack)) return ItemStackUtil.empty();
-
-        NbtCompound nbt = storageBoxStack.getNbt();
-
-        if (nbt == null) return ItemStackUtil.empty();
-        Optional<ItemStack> optionalStack = NbtUtil.getItemStack(nbt, "StorageItemData", registryLookup);
-        return optionalStack.orElseGet(ItemStackUtil::empty);
-
+        return StorageBoxAPIHook.getStack(storageBoxStack, registryLookup);
     }
 
     public static int getCount(ItemStack storageBoxStack) {
-        if (!isStorageBox(storageBoxStack)) return 0;
-
-        NbtCompound nbt = storageBoxStack.getNbt();
-        if (nbt == null) return 0;
-        return NbtUtil.getInt(nbt, "StorageSize");
+        return StorageBoxAPIHook.getCount(storageBoxStack);
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {
-        if (!isStorageBox(storageBoxStack)) return;
-
-        NbtCompound nbt = storageBoxStack.getOrCreateNbt();
-        NbtUtil.putInt(nbt, "StorageSize", count);
+        StorageBoxAPIHook.setCount(storageBoxStack, count);
     }
 }
