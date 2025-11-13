@@ -10,6 +10,6 @@ public class ExporterBlockEntity extends CompatBlockEntity {
     }
 
     public ExporterBlockEntity(TileCreateEvent e) {
-        this(BlockEntities.EXPORTER.getOrNull(), e);
+        this(null, e); // BlockEntities.EXPORTER.getOrNull()
     }
 }

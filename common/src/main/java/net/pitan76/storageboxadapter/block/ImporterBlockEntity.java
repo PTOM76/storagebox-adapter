@@ -9,6 +9,6 @@ public class ImporterBlockEntity extends CompatBlockEntity {
         super(type, e);
     }
     public ImporterBlockEntity(TileCreateEvent e) {
-        this(BlockEntities.IMPORTER.getOrNull(), e);
+        this(null, e); // BlockEntities.IMPORTER.getOrNull()
     }
 }

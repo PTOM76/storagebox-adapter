@@ -37,7 +37,7 @@ public class ImporterScreenHandler extends ExtendedScreenHandler {
     }
 
     public ImporterScreenHandler(int syncId, PlayerInventory playerInventory, @Nullable ImporterBlockEntity tile, Inventory inventory, Inventory filter) {
-        super(ScreenHandlers.IMPORTER, syncId);
+        super(null, syncId); // ScreenHandlers.IMPORTER
 
         this.inventory = inventory;
         this.filter = filter;

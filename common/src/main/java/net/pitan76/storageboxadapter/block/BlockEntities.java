@@ -11,13 +11,13 @@ import static net.pitan76.storageboxadapter.StorageBoxAdapter.registry;
 
 public class BlockEntities {
     public static RegistryResult<BlockEntityType<?>> ADAPTER;
-    public static RegistryResult<BlockEntityType<?>> IMPORTER;
-    public static RegistryResult<BlockEntityType<?>> EXPORTER;
+    //public static RegistryResult<BlockEntityType<?>> IMPORTER;
+    //public static RegistryResult<BlockEntityType<?>> EXPORTER;
 
     public static void init() {
         ADAPTER = registry.registerBlockEntityType(_id("adapter"), () -> create(AdapterBlockEntity::new, Blocks.ADAPTER.getOrNull()));
-        IMPORTER = registry.registerBlockEntityType(_id("importer"), () -> create(ImporterBlockEntity::new, Blocks.IMPORTER.getOrNull()));
-        EXPORTER = registry.registerBlockEntityType(_id("exporter"), () -> create(ExporterBlockEntity::new, Blocks.EXPORTER.getOrNull()));
+        //IMPORTER = registry.registerBlockEntityType(_id("importer"), () -> create(ImporterBlockEntity::new, Blocks.IMPORTER.getOrNull()));
+        //EXPORTER = registry.registerBlockEntityType(_id("exporter"), () -> create(ExporterBlockEntity::new, Blocks.EXPORTER.getOrNull()));
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> create(BlockEntityTypeBuilder.Factory<T> supplier, Block... blocks) {

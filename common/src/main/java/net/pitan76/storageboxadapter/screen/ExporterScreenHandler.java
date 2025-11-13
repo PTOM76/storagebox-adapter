@@ -36,7 +36,7 @@ public class ExporterScreenHandler extends ExtendedScreenHandler {
     }
 
     public ExporterScreenHandler(int syncId, PlayerInventory playerInventory, @Nullable ExporterBlockEntity tile, Inventory filter) {
-        super(ScreenHandlers.EXPORTER, syncId);
+        super(null, syncId); // ScreenHandlers.EXPORTER
 
         this.filter = filter;
         this.playerInventory = playerInventory;
