@@ -15,6 +15,8 @@ import net.pitan76.mcpitanlib.api.gui.args.CreateMenuEvent;
 import net.pitan76.mcpitanlib.api.gui.inventory.IInventory;
 import net.pitan76.mcpitanlib.api.gui.inventory.sided.VanillaStyleSidedInventory;
 import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.AvailableSlotsArgs;
+import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.CanExtractArgs;
+import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.CanInsertArgs;
 import net.pitan76.mcpitanlib.api.gui.v2.ExtendedScreenHandlerFactory;
 import net.pitan76.mcpitanlib.api.tile.CompatBlockEntity;
 import net.pitan76.mcpitanlib.api.tile.ExtendBlockEntityTicker;
@@ -63,6 +65,12 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
     @Override
     public int[] getAvailableSlots(AvailableSlotsArgs args) {
         return new int[]{0};
+    }
+
+    @Override
+    public boolean canInsert(CanInsertArgs args) {
+        if (inv.isEmpty()) return false;
+        return VanillaStyleSidedInventory.super.canInsert(args);
     }
 
     @Override
