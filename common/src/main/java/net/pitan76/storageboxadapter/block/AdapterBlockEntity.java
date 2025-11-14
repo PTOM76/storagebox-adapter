@@ -102,7 +102,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         ItemStack storageBoxStack = inv.get(0);
         if (!StorageBoxUtil.isStorageBox(storageBoxStack)) return;
 
-        int count = StorageBoxUtil.getCount(storageBoxStack);
+        int count = StorageBoxUtil.getCount(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
         int min = Math.min(count, 32);
 
         if (storageBoxStack != prevStack) {

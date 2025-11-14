@@ -1,0 +1,7 @@
+tiny	2	0	intermediary	named
+c	net/minecraft/class_1496	
+	m	()Lnet/minecraft/class_1263;	method_56680	getInventoryYarn
+c	net/minecraft/class_329	
+	m	(Lnet/minecraft/class_332;Lnet/minecraft/class_9779;)V	method_1759	renderHotbarYarn
+c	net/minecraft/class_7225	net/minecraft/registry/RegistryWrapper
+	c	class_7874	WrapperLookup

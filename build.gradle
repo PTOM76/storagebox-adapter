@@ -33,7 +33,10 @@ subprojects {
         //mappings loom.officialMojangMappings()
 
         // Fabric Yarn Mappings
-        mappings "net.fabricmc:yarn:${rootProject.yarn_mappings}:v2"
+        mappings loom.layered() {
+            it.mappings("net.fabricmc:yarn:${rootProject.yarn_mappings}:v2")
+            it.mappings file("../mappings/121-1fix.tiny")
+        }
 
         modApi "net.pitan76:mcpitanlib-common-${rootProject.mcpitanlib_version}"
     }
