@@ -21,7 +21,6 @@ import net.pitan76.mcpitanlib.api.tile.CompatBlockEntity;
 import net.pitan76.mcpitanlib.api.tile.ExtendBlockEntityTicker;
 import net.pitan76.mcpitanlib.api.util.InventoryUtil;
 import net.pitan76.mcpitanlib.api.util.ItemStackUtil;
-import net.pitan76.mcpitanlib.api.util.RegistryLookupUtil;
 import net.pitan76.mcpitanlib.api.util.TextUtil;
 import net.pitan76.mcpitanlib.api.util.collection.ItemStackList;
 import net.pitan76.mcpitanlib.api.util.math.PosUtil;
@@ -102,11 +101,11 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         ItemStack storageBoxStack = inv.get(0);
         if (!StorageBoxUtil.isStorageBox(storageBoxStack)) return;
 
-        int count = StorageBoxUtil.getCount(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
+        int count = StorageBoxUtil.getCount(storageBoxStack);
         int min = Math.min(count, tmpStackMaxCount / 2);
         if (storageBoxStack != prevStack) {
             // StorageBoxの中身を取得してadapterInvにセット
-            ItemStack stack = StorageBoxUtil.getStack(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
+            ItemStack stack = StorageBoxUtil.getStack(storageBoxStack);
 
             prevStack = storageBoxStack;
             if (ItemStackUtil.isEmpty(stack) || count <= 0) {
@@ -125,7 +124,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         if (count <= 0) { // StorageBoxが空のときはadapterInvの中身をStorageBoxに移す
             if (StorageBoxUtil.canInsert(adapterStack)) {
                 ItemStack newStack = ItemStackUtil.copy(adapterStack);
-                StorageBoxUtil.setStack(storageBoxStack, newStack, RegistryLookupUtil.getRegistryLookup(this));
+                StorageBoxUtil.setStack(storageBoxStack, newStack);
                 StorageBoxUtil.setCount(storageBoxStack, ItemStackUtil.getCount(newStack));
                 inv.set(0, storageBoxStack);
                 tmpStackMaxCount = ItemStackUtil.getMaxCount(newStack);
