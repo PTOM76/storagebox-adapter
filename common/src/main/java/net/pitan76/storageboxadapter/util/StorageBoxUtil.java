@@ -22,4 +22,12 @@ public class StorageBoxUtil {
     public static void setCount(ItemStack storageBoxStack, int count) {
         StorageBoxAPIHook.setCount(storageBoxStack, count);
     }
+
+    public static void setStack(ItemStack storageBoxStack, ItemStack newStack, CompatRegistryLookup registryLookup) {
+        StorageBoxAPIHook.setStack(storageBoxStack, newStack, registryLookup);
+    }
+
+    public static boolean canInsert(ItemStack insertStack) {
+        return StorageBoxAPIHook.canInsert(insertStack);
+    }
 }
