@@ -14,7 +14,9 @@ public class StorageBoxAdapterNeoForge {
         IEventBus eventBus = modContainer.getEventBus();
         new StorageBoxAdapter();
 
-        if (PlatformUtil.isClient())
+        if (PlatformUtil.isClient()) {
             Objects.requireNonNull(eventBus).addListener(StorageBoxAdapterClientNeoForge::clientInit);
+            eventBus.addListener(StorageBoxAdapterClientNeoForge::registerMenuScreens);
+        }
     }
 }
