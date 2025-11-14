@@ -110,7 +110,6 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
 
             if (ItemStackUtil.isEmpty(stack) || count <= 0) {
                 tmpInv.set(0, ItemStackUtil.empty());
-                inv.set(0, storageBoxStack);
                 return;
             }
             prevStack = storageBoxStack;
