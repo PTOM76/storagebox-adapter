@@ -28,7 +28,6 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     modApi "net.pitan76:mcpitanlib-neoforge-${rootProject.mcpitanlib_version}"
-
     modImplementation "curse.maven:storagebox-mod-419839:6009598"
 }
 

@@ -2,16 +2,16 @@ package net.pitan76.storageboxadapter.util.neoforge;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.storagebox.ItemStorageBox;
-import net.pitan76.mcpitanlib.api.registry.CompatRegistryLookup;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.registry.RegistryWrapper;
 
 public class StorageBoxAPIHookImpl {
-    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
-        return ItemStorageBox.peekItemStack(storageBoxStack, registryLookup.getRegistryLookup());
+    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+        return ItemStorageBox.peekItemStack(storageBoxStack, registryLookup);
     }
 
-    public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
-        return ItemStorageBox.peekItemStackAll(storageBoxStack, registryLookup.getRegistryLookup()).getCount();
+    public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+        return ItemStorageBox.peekItemStackAll(storageBoxStack, registryLookup).getCount();
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {

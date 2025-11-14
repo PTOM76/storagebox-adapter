@@ -12,11 +12,11 @@ public class StorageBoxUtil {
     }
 
     public static ItemStack getStack(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
-        return StorageBoxAPIHook.getStack(storageBoxStack, registryLookup);
+        return StorageBoxAPIHook.getStack(storageBoxStack, registryLookup.getRegistryLookup());
     }
 
     public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
-        return StorageBoxAPIHook.getCount(storageBoxStack, registryLookup);
+        return StorageBoxAPIHook.getCount(storageBoxStack, registryLookup.getRegistryLookup());
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {

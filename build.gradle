@@ -65,13 +65,7 @@ subprojects {
                     addGameVersion '1.21.10'
 
                     relations {
-                        if (modLoader == "fabric") {
-                            requiredDependency "fabric-api"
-                            requiredDependency "storagebox-fabric"
-                        } else {
-                            requiredDependency "storagebox-mod"
-                        }
-
+                        requiredDependency "storagebox-mod"
                         requiredDependency 'mcpitanlibarch'
                     }
 
