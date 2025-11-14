@@ -7,12 +7,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class StorageBoxAPIHook {
     @ExpectPlatform
-    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+    public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
         throw new AssertionError();
     }
 

@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 import net.minecraft.registry.RegistryWrapper;
 
 public class StorageBoxAPIHookImpl {
-    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+    public static ItemStack getStack(ItemStack storageBoxStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
         return ItemStorageBox.peekItemStack(storageBoxStack, registryLookup);
     }
 
-    public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.RegistryLookup registryLookup) {
+    public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
         return ItemStorageBox.peekItemStackAll(storageBoxStack, registryLookup).getCount();
     }
 
