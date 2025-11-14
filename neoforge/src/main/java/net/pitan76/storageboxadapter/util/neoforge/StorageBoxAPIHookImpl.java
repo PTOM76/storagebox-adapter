@@ -17,4 +17,15 @@ public class StorageBoxAPIHookImpl {
     public static void setCount(ItemStack storageBoxStack, int count) {
         ItemStorageBox.setItemStackSize(storageBoxStack, count);
     }
+
+    public static void setStack(ItemStack storageBoxStack, ItemStack newStack, RegistryWrapper.WrapperLookup registryLookup) {
+        ItemStorageBox.setItemStack(storageBoxStack, newStack, registryLookup);
+    }
+
+    public static boolean canInsert(ItemStack insertStack) {
+        return !(insertStack.getItem() instanceof ItemStorageBox)
+                && insertStack.getComponentChanges().isEmpty()
+                && insertStack.isStackable()
+                && !insertStack.hasEnchantments();
+    }
 }

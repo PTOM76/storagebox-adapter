@@ -22,7 +22,7 @@ public class StorageBoxAPIHook {
     }
 
     @ExpectPlatform
-    public static void setStack(ItemStack storageBoxStack, ItemStack newStack, CompatRegistryLookup registryLookup) {
+    public static void setStack(ItemStack storageBoxStack, ItemStack newStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
         throw new AssertionError();
     }
 

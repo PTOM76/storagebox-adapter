@@ -24,7 +24,7 @@ public class StorageBoxUtil {
     }
 
     public static void setStack(ItemStack storageBoxStack, ItemStack newStack, CompatRegistryLookup registryLookup) {
-        StorageBoxAPIHook.setStack(storageBoxStack, newStack, registryLookup);
+        StorageBoxAPIHook.setStack(storageBoxStack, newStack, registryLookup.getRegistryLookup());
     }
 
     public static boolean canInsert(ItemStack insertStack) {
