@@ -15,7 +15,6 @@ import net.pitan76.mcpitanlib.api.gui.args.CreateMenuEvent;
 import net.pitan76.mcpitanlib.api.gui.inventory.IInventory;
 import net.pitan76.mcpitanlib.api.gui.inventory.sided.VanillaStyleSidedInventory;
 import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.AvailableSlotsArgs;
-import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.CanExtractArgs;
 import net.pitan76.mcpitanlib.api.gui.inventory.sided.args.CanInsertArgs;
 import net.pitan76.mcpitanlib.api.gui.v2.ExtendedScreenHandlerFactory;
 import net.pitan76.mcpitanlib.api.tile.CompatBlockEntity;
@@ -111,6 +110,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
 
             if (ItemStackUtil.isEmpty(stack) || count <= 0) {
                 tmpInv.set(0, ItemStackUtil.empty());
+                inv.set(0, storageBoxStack);
                 return;
             }
             prevStack = storageBoxStack;
@@ -120,11 +120,17 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         }
 
         ItemStack adapterStack = tmpInv.get(0);
-        if (ItemStackUtil.isEmpty(adapterStack)) return;
+        if (ItemStackUtil.isEmpty(adapterStack)) {
+            count = 0;
+            StorageBoxUtil.setCount(storageBoxStack, count);
+            inv.set(0, storageBoxStack);
+            return;
+        }
 
         // adapterInvのstackが変わったらStorageBoxの中身を更新
-        if (adapterStack.getCount() != min) {
-            count = count + (adapterStack.getCount() - min);
+        int adapterCount = ItemStackUtil.getCount(adapterStack);
+        if (adapterCount != min) {
+            count = count + (adapterCount - min);
             StorageBoxUtil.setCount(storageBoxStack, count);
             ItemStackUtil.setCount(adapterStack, Math.min(count, 32));
             tmpInv.set(0, adapterStack);
