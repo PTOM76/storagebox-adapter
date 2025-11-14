@@ -9,7 +9,7 @@ public class StorageBoxAPIHookImpl {
         return null;
     }
 
-    public static int getCount(ItemStack storageBoxStack) {
+    public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
         return -1;
     }
 

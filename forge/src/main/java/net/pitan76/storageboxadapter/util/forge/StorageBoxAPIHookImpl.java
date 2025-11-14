@@ -10,7 +10,7 @@ public class StorageBoxAPIHookImpl {
         return ItemStorageBox.peekItemStack(storageBoxStack, 1);
     }
 
-    public static int getCount(ItemStack storageBoxStack) {
+    public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
         return ItemStorageBox.peekItemStackAll(storageBoxStack).getCount();
     }
 

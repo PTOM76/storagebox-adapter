@@ -15,8 +15,8 @@ public class StorageBoxUtil {
         return StorageBoxAPIHook.getStack(storageBoxStack, registryLookup);
     }
 
-    public static int getCount(ItemStack storageBoxStack) {
-        return StorageBoxAPIHook.getCount(storageBoxStack);
+    public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
+        return StorageBoxAPIHook.getCount(storageBoxStack, registryLookup);
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {

@@ -12,7 +12,7 @@ public class StorageBoxAPIHook {
     }
 
     @ExpectPlatform
-    public static int getCount(ItemStack storageBoxStack) {
+    public static int getCount(ItemStack storageBoxStack, @Nullable CompatRegistryLookup registryLookup) {
         throw new AssertionError();
     }
 
