@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OHO",
+    "O#O",
+    "OHO"
+  ],
+  "key": {
+    "#": "storagebox:storagebox",
+    "O": "#minecraft:planks",
+    "H": "minecraft:hopper"
+  },
+  "result": {
+    "id": "storageboxadapter:adapter",
+    "count": 1
+  }
+}
