@@ -34,6 +34,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
     public ItemStackList tmpInv = ItemStackList.ofSize(1, ItemStackUtil.empty());
 
     public ItemStack prevStack = ItemStackUtil.empty();
+    public int tmpStackMaxCount = 32;
 
     public AdapterBlockEntity(BlockEntityType<?> type, TileCreateEvent e) {
         super(type, e);
@@ -68,7 +69,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
 
     @Override
     public boolean canInsert(CanInsertArgs args) {
-        if (inv.isEmpty()) return false;
+        if (inv.get(0).isEmpty()) return false;
         return VanillaStyleSidedInventory.super.canInsert(args);
     }
 
@@ -102,29 +103,34 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         if (!StorageBoxUtil.isStorageBox(storageBoxStack)) return;
 
         int count = StorageBoxUtil.getCount(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
-        int min = Math.min(count, 32);
-
+        int min = Math.min(count, tmpStackMaxCount / 2);
         if (storageBoxStack != prevStack) {
             // StorageBoxの中身を取得してadapterInvにセット
             ItemStack stack = StorageBoxUtil.getStack(storageBoxStack, RegistryLookupUtil.getRegistryLookup(this));
 
+            prevStack = storageBoxStack;
             if (ItemStackUtil.isEmpty(stack) || count <= 0) {
                 tmpInv.set(0, ItemStackUtil.empty());
                 inv.set(0, storageBoxStack);
                 return;
             }
-            prevStack = storageBoxStack;
 
-            ItemStackUtil.setCount(stack, min); // Configで最大64を変更可能にするべき
+            tmpStackMaxCount = ItemStackUtil.getMaxCount(stack);
+            min = Math.min(count, tmpStackMaxCount / 2);
+            ItemStackUtil.setCount(stack, min);
             tmpInv.set(0, stack);
         }
 
         ItemStack adapterStack = tmpInv.get(0);
-        if (ItemStackUtil.isEmpty(adapterStack)) {
-            count = 0;
-            StorageBoxUtil.setCount(storageBoxStack, count);
-            inv.set(0, storageBoxStack);
-            return;
+        if (count <= 0) { // StorageBoxが空のときはadapterInvの中身をStorageBoxに移す
+            if (StorageBoxUtil.canInsert(adapterStack)) {
+                ItemStack newStack = ItemStackUtil.copy(adapterStack);
+                StorageBoxUtil.setStack(storageBoxStack, newStack, RegistryLookupUtil.getRegistryLookup(this));
+                StorageBoxUtil.setCount(storageBoxStack, ItemStackUtil.getCount(newStack));
+                inv.set(0, storageBoxStack);
+                tmpStackMaxCount = ItemStackUtil.getMaxCount(newStack);
+                return;
+            }
         }
 
         // adapterInvのstackが変わったらStorageBoxの中身を更新
@@ -132,7 +138,7 @@ public class AdapterBlockEntity extends CompatBlockEntity implements ExtendBlock
         if (adapterCount != min) {
             count = count + (adapterCount - min);
             StorageBoxUtil.setCount(storageBoxStack, count);
-            ItemStackUtil.setCount(adapterStack, Math.min(count, 32));
+            ItemStackUtil.setCount(adapterStack, Math.min(count, tmpStackMaxCount / 2));
             tmpInv.set(0, adapterStack);
         }
     }

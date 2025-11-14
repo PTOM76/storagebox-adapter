@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " O ",
+    "OHO",
     "O#O",
-    " O "
+    "OHO"
   ],
   "key": {
     "#": {
@@ -11,6 +11,9 @@
     },
     "O": {
       "tag": "minecraft:planks"
+    },
+    "H": {
+      "item": "minecraft:hopper"
     }
   },
   "result": {

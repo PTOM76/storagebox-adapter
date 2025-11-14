@@ -20,4 +20,14 @@ public class StorageBoxAPIHook {
     public static void setCount(ItemStack storageBoxStack, int count) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static void setStack(ItemStack storageBoxStack, ItemStack newStack, CompatRegistryLookup registryLookup) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static boolean canInsert(ItemStack insertStack) {
+        throw new AssertionError();
+    }
 }
