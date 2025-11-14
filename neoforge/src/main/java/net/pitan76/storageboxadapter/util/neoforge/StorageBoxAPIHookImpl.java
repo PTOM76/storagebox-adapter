@@ -11,7 +11,9 @@ public class StorageBoxAPIHookImpl {
     }
 
     public static int getCount(ItemStack storageBoxStack, @Nullable RegistryWrapper.WrapperLookup registryLookup) {
-        return ItemStorageBox.peekItemStackAll(storageBoxStack, registryLookup).getCount();
+        ItemStack stack = ItemStorageBox.peekItemStackAll(storageBoxStack, registryLookup);
+        if (stack == null) return 0;
+        return stack.getCount();
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {
