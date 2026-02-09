@@ -15,10 +15,16 @@ public class StorageBoxAdapterFabric implements ModInitializer {
         new StorageBoxAdapter();
 
         FabricLoader.getInstance().getModContainer("storagebox").ifPresent(container -> {
-            Version version = container.getMetadata().getVersion();
-            try {
-                isStorageBox149over = version.compareTo(Version.parse("1.4.9")) >= 0;
-            } catch (VersionParsingException ignored) {}
+            String rawVersion = container.getMetadata().getVersion().getFriendlyString();
+            if (rawVersion.startsWith("1.4.9")) {
+                isStorageBox149over = true;
+            } else {
+                try {
+                    Version version = Version.parse(rawVersion);
+                    isStorageBox149over = version.compareTo(Version.parse("1.4.9")) >= 0;
+                } catch (VersionParsingException ignored) {}
+            }
+
         });
     }
 }
