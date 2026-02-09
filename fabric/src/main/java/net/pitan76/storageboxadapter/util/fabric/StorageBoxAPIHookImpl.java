@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.pitan76.mcpitanlib.api.registry.CompatRegistryLookup;
 import net.pitan76.storagebox.StorageBoxItem;
 import net.pitan76.storagebox.api.StorageBoxUtil;
+import net.pitan76.storageboxadapter.fabric.StorageBoxAdapterFabric;
 import org.jetbrains.annotations.Nullable;
 
 public class StorageBoxAPIHookImpl {
@@ -16,13 +17,14 @@ public class StorageBoxAPIHookImpl {
     }
 
     public static void setCount(ItemStack storageBoxStack, int count) {
-        if (count <= 0) {
+        if (!StorageBoxAdapterFabric.isStorageBox149over && count <= 0) {
             StorageBoxItem.removeItemDataAsInt(storageBoxStack, StorageBoxItem.KEY_SIZE);
             StorageBoxItem.removeItemDataAsInt(storageBoxStack, StorageBoxItem.KEY_ITEM_DATA);
             StorageBoxItem.removeItemDataAsInt(storageBoxStack, StorageBoxItem.KEY_ITEM_ID);
             StorageBoxItem.removeItemDataAsInt(storageBoxStack, StorageBoxItem.KEY_AUTO);
             return;
         }
+
         StorageBoxUtil.setAmountInStorageBox(storageBoxStack, count);
     }
 

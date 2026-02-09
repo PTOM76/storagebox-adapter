@@ -31,7 +31,7 @@ dependencies {
 
     modApi "net.pitan76:mcpitanlib-fabric-${rootProject.mcpitanlib_version}"
 
-    modImplementation "curse.maven:storagebox-fabric-517673:7117369"
+    modImplementation "curse.maven:storagebox-fabric-517673:7598563"
 }
 
 processResources {
